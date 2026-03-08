@@ -23,7 +23,7 @@ export default function AllocationChart({ holdings }: { holdings: HoldingWithMar
             {data.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
           </Pie>
           <Tooltip
-            formatter={(value: number, _: string, entry: any) => [eur(value), entry.payload.fullName]}
+            formatter={(value, _, entry) => [eur(Number(value ?? 0)), entry.payload.fullName]}
             contentStyle={{ background: '#111827', border: '1px solid #374151', borderRadius: 8 }}
             itemStyle={{ color: '#fff' }}
           />
