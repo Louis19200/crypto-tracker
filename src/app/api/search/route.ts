@@ -8,7 +8,12 @@ export async function GET(req: NextRequest) {
   try {
     const results = await searchCoins(query);
     return NextResponse.json(results);
-  } catch {
-    return NextResponse.json({ error: 'Search failed' }, { status: 500 });
+  } catch (err) {
+    // Log visible dans Vercel Functions logs
+    console.error('[search] CoinGecko error:', err);
+    return NextResponse.json(
+      { error: 'Search failed', detail: err instanceof Error ? err.message : String(err) },
+      { status: 500 }
+    );
   }
 }
